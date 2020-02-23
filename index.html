@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<style>
+
+.container {
+  background: black;
+  display: inline-block;
+  border: 2px solid black;
+  
+  margin-left : 20% ;
+  
+  margin-top : 5% ;
+  
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(30, 20px);
+  grid-template-rows: repeat(30, 20px);
+  grid-gap: 2px;
+}
+
+.cell {
+   /* center the cell content */
+  
+  background: white;
+}
+
+
+</style>
+
+
+</head>
+
+
+<body>
+
+
+
+
+<div class="container">
+  <div class="grid" id = "mygrid">
+  
+
+
+<script>
+
+var x="",i;
+
+element = document.getElementById("mygrid");
+
+for( i=0;i<900;i++)
+{
+x = x + '<div class = "cell" onclick = "render(this)" onmousedown = "rendermd(this)" onmouseup="rendermu(this)" onmouseover="rendermo(this)" ></div> '
+}
+
+element.innerHTML = x ;
+
+
+</script>
+
+    
+
+
+
+  </div>
+</div>
+
+
+<script> 
+
+var m = 0 ;
+
+
+function render(elem){
+
+elem.style.background = "red" ;
+
+}
+
+
+function rendermd(elem){
+
+elem.style.background = "red" ;
+
+m=m+1;
+}
+
+
+function rendermu(elem){
+
+elem.style.background = "red" ;
+
+m=m-1;
+}
+
+
+function rendermo(elem){
+
+if(m)elem.style.background = "red" ;
+
+}
+
+</script>
+
+
+
+
+
+
+
+</body>
+
+
+
+</html>
