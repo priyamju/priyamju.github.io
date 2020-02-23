@@ -9,27 +9,42 @@
 .container {
   background: black;
   display: inline-block;
-  border: 2px solid black;
+  border : 1px solid rgb(3,153,186) ;
+  box-shadow :4px 4px 4px 4px rgb(3,153,186) ;
   
-  margin-left : 20% ;
+  margin-left : 30% ;
   
-  margin-top : 5% ;
+ 
   
 }
 
 .grid {
   display: grid;
-  grid-template-columns: repeat(30, 20px);
-  grid-template-rows: repeat(30, 20px);
+  grid-template-columns: repeat(20, 20px);
+  grid-template-rows: repeat(20, 20px);
   grid-gap: 2px;
 }
 
 .cell {
    /* center the cell content */
   
-  background: white;
+ background : rgb(178,241,246) ;
+ 
+ 
 }
 
+body {
+background : url('https://wallpaperaccess.com/full/1567838.jpg');
+background-size : 100%;
+}
+
+.ab {
+font-family: "Comic Sans MS", cursive, sans-serif;
+font-size:50px ;
+font-weight:lighter;
+margin-left:30%;
+text-shadow :3px 3px  rgb(3,153,186) ;
+}
 
 </style>
 
@@ -37,8 +52,17 @@
 </head>
 
 
-<body>
+<body  >
 
+<h1 class="ab" > DESGIN CANVAS </h1>
+
+<h2 style = "margin-left:10% ; font-size:40px ; font-weight:lighter "    >Select Color</h2>
+
+<form  style = "margin-left:10%  "  >
+
+  <input type="color" id="favcolor"  value="#ff0000" />
+
+</form>
 
 
 
@@ -53,7 +77,7 @@ var x="",i;
 
 element = document.getElementById("mygrid");
 
-for( i=0;i<900;i++)
+for( i=0;i<400;i++)
 {
 x = x + '<div class = "cell" onclick = "render(this)" onmousedown = "rendermd(this)" onmouseup="rendermu(this)" onmouseover="rendermo(this)" ></div> '
 }
@@ -78,14 +102,19 @@ var m = 0 ;
 
 function render(elem){
 
-elem.style.background = "red" ;
+let x = document.getElementById("favcolor").value ;
+
+elem.style.background = x; 
+
 
 }
 
 
 function rendermd(elem){
 
-elem.style.background = "red" ;
+let x = document.getElementById("favcolor").value ;
+
+elem.style.background = x; 
 
 m=m+1;
 }
@@ -93,7 +122,9 @@ m=m+1;
 
 function rendermu(elem){
 
-elem.style.background = "red" ;
+let x = document.getElementById("favcolor").value ;
+
+elem.style.background = x; 
 
 m=m-1;
 }
@@ -101,7 +132,12 @@ m=m-1;
 
 function rendermo(elem){
 
-if(m)elem.style.background = "red" ;
+if(m){
+let x = document.getElementById("favcolor").value ;
+
+elem.style.background = x; 
+
+}
 
 }
 
