@@ -52,7 +52,7 @@ text-shadow :3px 3px  rgb(3,153,186) ;
 </head>
 
 
-<body  onmousedown="rendermd1()"  onmouseup="rendermu1()" >
+<body id="mb"  >
 
 <h1 class="ab" > DESGIN CANVAS </h1>
 
@@ -66,7 +66,7 @@ text-shadow :3px 3px  rgb(3,153,186) ;
 
 
 
-<div class="container">
+<div class="container" id="mc" >
   <div class="grid" id = "mygrid">
   
 
@@ -79,7 +79,7 @@ element = document.getElementById("mygrid");
 
 for( i=0;i<400;i++)
 {
-x = x + '<div class = "cell" onclick = "render(this)" onmousedown = "rendermd(this)" onmouseup="rendermu(this)" onmouseover="rendermo(this)" ></div> '
+x = x + '<div class = "cell" onclick = "render(this)"  onmousedown="rendermd1(this)"  onmouseup="rendermu1(this)" onmouseover="rendermo(this)" ></div> '
 }
 
 element.innerHTML = x ;
@@ -110,23 +110,20 @@ elem.style.background = x;
 }
 
 
-function rendermd(elem){
 
-let x = document.getElementById("favcolor").value ;
 
-elem.style.background = x; 
 
+function rendermd1(elem){
 m=m+1;
-}
 
-
-function rendermu(elem){
 
 let x = document.getElementById("favcolor").value ;
 
 elem.style.background = x; 
 
-m=m-1;
+
+
+
 }
 
 
@@ -141,13 +138,74 @@ elem.style.background = x;
 
 }
 
-function rendermd1(){
-m=m+1;
+function rendermu1(elem){
+m=m-1;
+
+
+let x = document.getElementById("favcolor").value ;
+
+elem.style.background = x; 
+
 }
 
-function rendermu1(){
-m=m-1;
-}
+
+
+
+
+
+
+document.addEventListener("mousedown", (evt) => {
+    const flyoutElement = document.getElementById("mc");
+    let targetElement = evt.target; // clicked element
+
+    do {
+        if (targetElement == flyoutElement) {
+            // Do nothing, just return.
+            
+            return;
+        }
+        // Go up the DOM.
+        targetElement = targetElement.parentNode;
+    } while (targetElement);
+
+    // Do something useful here.
+    m=m+1;
+
+});
+
+
+
+
+
+
+
+
+document.addEventListener("mouseup", (evt) => {
+    const flyoutElement = document.getElementById("mc");
+    let targetElement = evt.target; // clicked element
+
+    do {
+        if (targetElement == flyoutElement) {
+            // Do nothing, just return.
+            
+            return;
+        }
+        // Go up the DOM.
+        targetElement = targetElement.parentNode;
+    } while (targetElement);
+
+    // Do something useful here.
+    m=m-1;
+
+});
+
+
+
+
+
+
+
+
 
 </script>
 
