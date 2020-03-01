@@ -13,7 +13,7 @@
   box-shadow :4px 4px 4px 4px rgb(3,153,186) ;
   
   margin-left : 30% ;
-  
+  cursor : url('data:image/x-icon;base64,AAACAAEAICAQAAAAAADoAgAAFgAAACgAAAAgAAAAQAAAAAEABAAAAAAAAAIAAAAAAAAAAAAAEAAAAAAAAAAAAAAAegB4AABQnADRAM4AADRmAF7P/wAwwf8AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABEAAAAAAAAAAAAAAAAAAAEQgAAAAAAAAAAAAAAAAAARCAAAAAAAAAAAAAAAAAABEIAAAAAAAAAAAAAAAAAAEIgAAAAAAAAAAAAAAAAAARCAAAAAAAAAAAAAAAAAABEIAAAAAAAAAAAAAAAAAAEQgAAAAAAAAAAAAAAAAAARCAAAAAAAAAAAAAAAAAABEIAAAAAAAAAAAAAAAAAAEQgAAAAAAAAAAAAAAAAAARCAAAAAAAAAAAAAAAAAABEIAAAAAAAAAAAAAAAAAAEQgAAAAAAAAAAAAAAAAAARCAAAAAAAAAAAAAABWVgBEIAAAAAAAAAAAAABVZmZVAgAAAAAAAAAAAAAFVVZlVVAAAAAAAAAAAAAABVZlVVVgAAAAAAAAAAAAAAVWZVVWZQAAAAAAAAAAAABVFhVWZlUAAAAAAAAAAAAAEWVVYVVVAAAAAAAAAAAAABYRUVVVVQAAAAAAAAAAAAExFRZVVWAAAAAAAAAAAAABMxEVVVZgAAAAAAAAAAAAAzMTVRZlAAAAAAAAAAAAABMzMRFgAAAAAAAAAAAAAAATMREAAAAAAAAAAAAAAAADMxAAAAAAAAAAAAAAAAAAAxAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD////4////8P///+D////B////g////wf///4P///8H///+D////B////g////wf///4P///8H///+D///DB///AA///gAf//wAP//8AD///AAf//gAH//4AB//+AAf//AAP//wAD//8AB//+AA///gB///wD///8H////H////w=='),auto ;
  
   
 }
@@ -46,6 +46,14 @@ margin-left:30%;
 text-shadow :3px 3px  rgb(3,153,186) ;
 }
 
+
+#equip{
+width : 100px ;
+
+}
+
+
+
 </style>
 
 
@@ -63,6 +71,23 @@ text-shadow :3px 3px  rgb(3,153,186) ;
   <input type="color" id="favcolor"  value="#ff0000" />
 
 </form>
+
+
+<form id="myselect" style = "margin-left:80% ; margin-top:1% ;  " >
+
+
+<select id="equip"  >
+
+<option value=1 >BRUSH </option>
+
+<option value=2 >ERASER </option>
+
+</select>
+
+</form>
+
+
+
 
 
 
@@ -103,9 +128,13 @@ var m = 0 ;
 function render(elem){
 
 let x = document.getElementById("favcolor").value ;
+let y =document.getElementById("equip").value ;
 
-elem.style.background = x; 
+if(y==1){
 
+elem.style.background = x; }
+
+else  elem.style.background = "rgb(178,241,246)" ;
 
 }
 
@@ -119,7 +148,12 @@ m=m+1;
 
 let x = document.getElementById("favcolor").value ;
 
+let y =document.getElementById("equip").value ;
+
+if(y==1)
 elem.style.background = x; 
+
+else elem.style.background = "rgb(178,241,246)" ;
 
 
 
@@ -132,7 +166,12 @@ function rendermo(elem){
 if(m){
 let x = document.getElementById("favcolor").value ;
 
+let y =document.getElementById("equip").value ;
+
+if(y==1)
 elem.style.background = x; 
+
+else elem.style.background = "rgb(178,241,246)" ;
 
 }
 
@@ -144,7 +183,12 @@ m=m-1;
 
 let x = document.getElementById("favcolor").value ;
 
+let y =document.getElementById("equip").value ;
+
+if(y==1)
 elem.style.background = x; 
+
+else elem.style.background = "rgb(178,241,246)" ;
 
 }
 
@@ -156,10 +200,11 @@ elem.style.background = x;
 
 document.addEventListener("mousedown", (evt) => {
     const flyoutElement = document.getElementById("mc");
+   const flyoutElement2 = document.getElementById("myselect");
     let targetElement = evt.target; // clicked element
 
     do {
-        if (targetElement == flyoutElement) {
+        if (targetElement == flyoutElement || targetElement == flyoutElement2 ) {
             // Do nothing, just return.
             
             return;
@@ -183,9 +228,9 @@ document.addEventListener("mousedown", (evt) => {
 document.addEventListener("mouseup", (evt) => {
     const flyoutElement = document.getElementById("mc");
     let targetElement = evt.target; // clicked element
-
+    const flyoutElement2 = document.getElementById("myselect");
     do {
-        if (targetElement == flyoutElement) {
+        if (targetElement == flyoutElement || targetElement == flyoutElement2      ) {
             // Do nothing, just return.
             
             return;
