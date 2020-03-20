@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+
+  <style>
+
+  canvas {
+    border:1px solid #d3d3d3;
+    background-color: #f1f1f1;
+}
+
+  </style>
+
+  </head>
+
+
+<body onload = "startGame()">
+  <script>
+  var myBox;
+  var myObst = [];
+  var myScore;
+
+function startGame() {
+
+  myBox = new component(30, 30, 10, 0, "blue");
+  myBox.gravity = 0.05;
+
+  myScore = new component(40, 50, 530, 30,"black","text");
+
+  myGameArea.start();
+
+}
+
+var myGameArea = {
+
+  canvas: document.createElement("canvas"),
+
+  start : function() {
+
+    this.canvas.width = 600;
+    this.canvas.height = 300;
+
+    this.context = this.canvas.getContext("2d");
+
+    document.body.insertBefore(this.canvas, document.body.childNodes[0]);
+
+    this.frameno = 0 ;
+
+    this.interval = setInterval(updateGameArea, 10);
+
+
+  },
+
+  clear : function() {
+
+    this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
+
+  }
+
+
+
+}
+
+
+
+
+function component(height, width, x, y, color, type) {
+  this.height = height;
+  this.width = width;
+  this.x = x;
+  this.y = y;
+  this.score=0;
+  this.type = type;
+  this.SpeedX=0;
+  this.SpeedY=0;
+  this.gravity=0;
+  this.gravitySpeed=0;
+
+  this.update = function() {
+
+  ctx = myGameArea.context;
+
+  if (this.type == "text") {
+
+    ctx.font = this.width + " " + this.height;
+
+    ctx.fillStyle = color;
+
+    ctx.fillText(this.text, this.x, this.y);
+
+
+  } else {
+
+    ctx.fillStyle = color;
+
+    ctx.fillRect(this.x, this.y, this.width, this.height);
+
+
+    }
+
+
+
+}
+
+
+  this.newpos=function () {
+
+    this.gravitySpeed += this.gravity;
+
+
+
+    this.x += this.SpeedX;
+
+    this.y += this.SpeedY + this.gravitySpeed;
+
+    this.hitBottom();
+
+  }
+
+
+   this.hitBottom=function() {
+
+    var diff = myGameArea.canvas.height - this.height;
+
+    if (this.y > diff) {
+      this.y = diff;
+      this.gravitySpeed = 0;
+
+    }
+
+
+
+  }
+
+
+  this.collision = function(obj){
+
+
+  var boxtop = this.y ;
+
+  var boxbottom = this.y + this.height ;
+
+  var boxleft = this.x ;
+
+  var boxright = this.x + this.width ;
+
+  var objtop = obj.y ;
+
+  var objbottom = obj.y + obj.height ;
+
+  var objleft = obj.x ;
+
+  var objright = obj.x + obj.width ;
+
+  var crash=true ;
+
+  if( (boxbottom < objtop) || (boxtop > objbottom)  || ( boxleft > objright ) || (boxright < objleft) ){crash= false ;}
+
+  return crash ;
+
+  }
+
+  }
+
+
+
+function updateGameArea(){
+
+var x, height, gap, minHeight, maxHeight, minGap, maxGap;
+
+for ( i = 0; i < myObst.length; i+=1){
+
+  if (myBox.collision(myObst[i])){
+
+    return;
+
+  }
+}
+
+
+myGameArea.clear();
+
+myGameArea.frameno += 1;
+
+var mingap, minh, maxh, maxgap;
+
+if (myGameArea.frameno ==1 || myGameArea.frameno%150 == 0 ) {
+
+x = myGameArea.canvas.width;
+        minHeight = 20;
+        maxHeight = 200;
+        height = Math.floor(Math.random()*(maxHeight-minHeight+1)+minHeight);
+        minGap = 50;
+        maxGap = 200;
+        gap = Math.floor(Math.random()*(maxGap-minGap+1)+minGap);
+
+
+
+  myObst.push(new component(height, 20, x, 0, "green"));
+
+  myObst.push(new component(x - height - gap, 20, x, height + gap, "green") );
+
+}
+
+
+for (i = 0 ; i < myObst.length; i+=1) {
+
+  myObst[i].x += -1;
+
+  myObst[i].update() ;
+
+}
+
+myScore.text = "SCORE : " + (myGameArea.frameno);
+
+myScore.update();
+
+myBox.newpos();
+
+myBox.update();
+
+
+}
+
+function everyinterval(n) {
+    if ((myGameArea.frameNo / n) % 1 == 0) {return true;}
+    return false;
+}
+
+
+function mup(n){
+
+myBox.gravity=n ;
+
+}
+
+
+</script>
+
+<br>
+
+<button onmousedown = "mup(-0.055)" onmouseup = "mup(0.05)" >FLY</button>
+
+</body>
+
+</html>
+
